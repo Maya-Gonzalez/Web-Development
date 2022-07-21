@@ -4,7 +4,11 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
+import nltk
+from nltk.corpus import stopwords
 
+
+# WEB SCRAPING 
 URL = "https://www.nytimes.com/section/world"
 page = requests.get(URL)
 response = BeautifulSoup(page.text, "html.parser")
@@ -39,4 +43,41 @@ for article in articles:
     # print()
     articles_dict.append(article_dict)
 df = pd.DataFrame(articles_dict)
-print(df)
+
+
+# TEXT PROCESSING
+def clean_text(article):
+    if(article is None or pd.isna(article)):
+        return None
+    
+    # tokenization: split string sequence into individual words
+    summary_elem = article.find_all('p')[0]
+    if summary_elem :
+        summary_elem= summary_elem.text
+    tokens = nltk.word_tokenize(summary_elem)
+
+    # remove leading and trailing spaces
+    tokens_flattened = [t.strip() for t in tokens] 
+
+    # remove any non-alphabet characters
+    token_chars = [t.lower() for t in tokens_flattened if t.isalpha()]
+
+    # method without using list comprehension 
+    # tokenChars = []
+    # for t in tokens_flattened:
+    #     if(t.isalpha()):
+    #         tokenChars.append(t.lower())
+     
+    
+    # filter out non-target words
+    stop_words = list(set(stopwords.words('english')))
+    # append to list of stop words
+    [stop_words.append(x) for x in ['said', 'says', 'say']]
+    # remove stop words 
+    cleaned_tokens = [t for t in token_chars if t not in stop_words]
+
+    
+    print(cleaned_tokens)
+    print()
+for article in articles:
+    clean_text(article)
