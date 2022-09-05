@@ -5,6 +5,21 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import requests
 import nltk
+
+# folling comment is to fix [the nltk_data] error of 'certificate verify failed' 
+# https://github.com/gunthercox/ChatterBot/issues/930#issuecomment-322111087
+
+# import ssl
+
+# try:
+#     _create_unverified_https_context = ssl._create_unverified_context
+# except AttributeError:
+#     pass
+# else:
+#     ssl._create_default_https_context = _create_unverified_https_context
+# nltk.download()
+
+nltk.download('punkt')
 from nltk.corpus import stopwords
 
 
@@ -47,8 +62,12 @@ df = pd.DataFrame(articles_dict)
 
 # TEXT PROCESSING
 def clean_text(article):
-    if(article is None or pd.isna(article)):
+    #FIXMEEEE
+    # if(article is None) or (pd.isna(article)):
+    #     return None
+    if(article is None):
         return None
+    
     
     # tokenization: split string sequence into individual words
     summary_elem = article.find_all('p')[0]
@@ -69,15 +88,25 @@ def clean_text(article):
     #         tokenChars.append(t.lower())
      
     
-    # filter out non-target words
+    # create list of stop words (non-target words)
     stop_words = list(set(stopwords.words('english')))
-    # append to list of stop words
+    # append extras to list of stop words
     [stop_words.append(x) for x in ['said', 'says', 'say']]
-    # remove stop words 
+    # Remove stop words 
     cleaned_tokens = [t for t in token_chars if t not in stop_words]
+    return cleaned_tokens
 
-    
-    print(cleaned_tokens)
-    print()
-for article in articles:
-    clean_text(article)
+
+# for article in articles:
+#     clean_text(article)
+
+print(clean_text(articles[0]))
+print(articles[0].find_all('p')[0])
+
+# Count word frequences
+def get_token_frequencies(cleaned_text, n_tokens=5):
+    # count frequency of tokens
+    fdist_tokens = nltk.FreqDist(cleaned_text)
+    fdist_tokens_sorted = {k:v for k,v in sorted(fdist_tokens.items(), key = lambda x : x[1],reverse= True)[:n_tokens]}
+    return fdist_tokens_sorted
+print(get_token_frequencies(clean_text(articles[0])))
