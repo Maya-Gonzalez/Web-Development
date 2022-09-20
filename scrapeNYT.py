@@ -115,13 +115,11 @@ def get_token_frequencies(cleaned_text, n_tokens=5):
 print(get_token_frequencies(clean_text(articles[0])))
 
 # shorten URLs
-BITLY_ACCESS_TOKEN = "07e97263f45195a1fa62d7f154f1c8bed03049b2"
-b = bitly_api.Connection(access_token = BITLY_ACCESS_TOKEN)
-shortened_url = b.shorten(article_dict['link'])
-# article_dict['link']
 
 # FIXMEE: save keys in another file that isn't pushed to github
 # Autherntication
+
+
 
 auth = tweepy.OAuthHandler(twitter_auth_keys[API_KEY], twitter_auth_keys[API_KEY_SECRET])
 auth.set_access_token(twitter_auth_keys[ACCESS_TOKEN], twitter_auth_keys[ACCESS_TOKEN_SECRET])
