@@ -1,0 +1,10 @@
+export API_KEY="ABDJFdfrpf956irjglkfmgi5kgf"
+export TOKEN="213j29rhdfn94htrfuh94"
+
+# FIXMEE: save keys in another file that isn't pushed to github
+# Autherntication
+ACCESS_TOKEN = "1550211171117985792-etGKgvnhsmX8k23T4u7HynYTpGD2hE"
+ACCESS_TOKEN_SECRET = "K7SfRJcFsozAn9beIaxTRJ6PdhlofXxNAo4h7NjWC0U09"
+
+API_KEY = "zjpL33zdENqbwwT7IaFouuHGq"
+API_KEY_SECRET = "Jc8ulzyKRnp6x6mO9qpvQVmq0ScJQnzGN16cCzirdCd4j73dyC"
