@@ -1,0 +1,55 @@
+
+div{
+    
+    background-color: aliceblue;
+}
+h1{
+    position: relative;
+    margin:0 auto;
+    font-family: 'Bad Script', cursive;
+}
+p{
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+}
+body{
+    position: relative;
+    text-align: center;
+}
+/* ID Selector */
+#top-container{
+    background-color: aliceblue;
+    position: relative;
+    padding-top: 50px;
+}
+/* Class Selector */
+.middle-container{
+
+}
+.bottom-container{
+
+}
+.top-cloud{
+    position: absolute;
+    right:400px;
+}
+.bottom-cloud{
+    position: absolute;
+    left:300px;
+
+}
+
+
+
+
+body{
+    margin:0;
+}
+.skill-img{
+    width:300px;
+    height:300px;
+}
+.skill-text{
+    margin: 0 200px 50px 200px;
+
+}
